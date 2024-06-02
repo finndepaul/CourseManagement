@@ -9,7 +9,11 @@
   <ItemGroup>
     <Folder Include="DataTransferObjects\" />
     <Folder Include="Interfaces\Repositories\" />
-    <Folder Include="ValueObjects\" />
+    <Folder Include="ValueObjects\Pagination\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Domain\CourseManagement.Domain.csproj" />
   </ItemGroup>
 
 </Project>

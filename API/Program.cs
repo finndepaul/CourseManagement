@@ -1,4 +1,6 @@
-﻿using CourseManagement.Infrastructure.Extensions; // tự using ( dependencies Infrastructure )
+﻿using CourseManagement.Infrastructure.Database.AppDbContext;
+using CourseManagement.Infrastructure.Extensions;
+using Microsoft.EntityFrameworkCore; // tự using ( dependencies Infrastructure )
 namespace API
 {
     public class Program
@@ -15,6 +17,8 @@ namespace API
             builder.Services.AddSwaggerGen();
 
             builder.Services.AddApplication(); // cấu hình cho auto mapper
+
+            builder.Services.AddEventBus(builder.Configuration); // DI
 
             var app = builder.Build();
 
