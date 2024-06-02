@@ -7,7 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Database\Configurations\" />
     <Folder Include="Extensions\AutoMapperProfiles\" />
     <Folder Include="Implements\Repositories\" />
   </ItemGroup>
@@ -24,6 +23,11 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Application\CourseManagement.Application.csproj" />
+    <ProjectReference Include="..\Domain\CourseManagement.Domain.csproj" />
   </ItemGroup>
 
 </Project>

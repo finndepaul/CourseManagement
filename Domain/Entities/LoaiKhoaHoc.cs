@@ -9,6 +9,9 @@ namespace CourseManagement.Domain.Entities
     public class LoaiKhoaHoc
     {
         public int LoaiKhoaHocID { get; set; }
-        public string TenLoai { get; set; }
+        public string? TenLoai { get; set; }
+
+        // Khóa ngoại
+        public virtual List<KhoaHoc>? khoaHocs { get; set; }
     }
 }
