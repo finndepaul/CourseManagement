@@ -7,8 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="DataTransferObjects\" />
-    <Folder Include="Interfaces\Repositories\" />
     <Folder Include="ValueObjects\Pagination\" />
   </ItemGroup>
 

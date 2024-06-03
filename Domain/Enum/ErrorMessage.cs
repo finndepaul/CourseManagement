@@ -10,6 +10,6 @@ namespace CourseManagement.Domain.Enum
     {
         Successfull,
         Failed,
-        Nullable,
+        ModelIsNull,
     }
 }

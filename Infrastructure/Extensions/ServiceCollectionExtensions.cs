@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using CourseManagement.Application.Interfaces.Repositories;
+using CourseManagement.Infrastructure.Implements.Repositories;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -12,7 +14,8 @@ namespace CourseManagement.Infrastructure.Extensions
     {
         public static IServiceCollection AddEventBus(this IServiceCollection services, IConfiguration configuration)
         {
-           
+            services.AddTransient<ILoaiKhoaHocRepos, LoaiKhoaHocRepos>();
+            services.AddTransient<IKhoaHocRepos, KhoaHocRepos>();
             return services;
         }
     }
