@@ -1,4 +1,5 @@
 ﻿using CourseManagement.Application.Interfaces.Repositories;
+using CourseManagement.Application.ValueObjects.Pagination;
 using CourseManagement.Domain.Entities;
 using CourseManagement.Infrastructure.Database.AppDbContext;
 using Microsoft.EntityFrameworkCore;
@@ -17,13 +18,22 @@ namespace CourseManagement.Infrastructure.Implements.Repositories
         {
             _db = new CourseManagementDbContext();
         }
-        public async Task<List<KhoaHoc>> GetAll()
+        public async Task<PageResult<KhoaHoc>> GetAll(string? name, PaginationRequest request)
         {
             var model = await _db.KhoaHocs
-                .Include(x => x.LoaiKhoaHoc)
+                //.Include(x => x.LoaiKhoaHoc)
                 .AsNoTracking()
+                .AsQueryable()
                 .ToListAsync();
-            return model;
+            
+            if (!string.IsNullOrWhiteSpace(name))
+            {
+                model = model.Where(x => x.TenKhoaHoc.ToLower().Contains(name.ToLower())).ToList();
+                
+            }
+            var result = PageResult<KhoaHoc>.ToPageResult(request,model);
+            request.TotalCount = model.Count();
+            return new PageResult<KhoaHoc>(request,result);
         }
         public async Task<bool> CreateNew(KhoaHoc khoaHoc, CancellationToken cancellationToken)
         {

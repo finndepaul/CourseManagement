@@ -2,6 +2,7 @@
 using CourseManagement.Application.DataTransferObjects.KhoaHoc;
 using CourseManagement.Application.DataTransferObjects.KhoaHoc.Request;
 using CourseManagement.Application.Interfaces.Repositories;
+using CourseManagement.Application.ValueObjects.Pagination;
 using CourseManagement.Domain.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -21,25 +22,26 @@ namespace CourseManagement.API.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet]
-        public async Task<IActionResult> GetAll()
+        [HttpGet("get-all")]
+        public async Task<IActionResult> GetAll([FromQuery] string? name, [FromQuery] PaginationRequest request)
         {
             try
             {
-                var model = await _repos.GetAll();
-                var result = model.Select(x => new KhoaHocDto()
-                {
-                    TenKhoaHoc = x.TenKhoaHoc,
-                    ThoiGianHoc = x.ThoiGianHoc,
-                    GioiThieu = x.GioiThieu,
-                    NoiDung = x.NoiDung,
-                    HocPhi = x.HocPhi,
-                    SoHocVien = x.SoHocVien,
-                    SoLuongMon = x.SoLuongMon,
-                    HinhAnh = x.HinhAnh,
-                    TenLoai = x.LoaiKhoaHoc == null ? "N/a" : x.LoaiKhoaHoc.TenLoai,
-                });
-                return Ok(result);
+                var model = await _repos.GetAll(name,request);
+                //var result = model.Data.Select(x => new KhoaHocDto()
+                //{
+                //    TenKhoaHoc = x.TenKhoaHoc,
+                //    ThoiGianHoc = x.ThoiGianHoc,
+                //    GioiThieu = x.GioiThieu,
+                //    NoiDung = x.NoiDung,
+                //    HocPhi = x.HocPhi,
+                //    SoHocVien = x.SoHocVien,
+                //    SoLuongMon = x.SoLuongMon,
+                //    HinhAnh = x.HinhAnh,
+                //    TenLoai = x.LoaiKhoaHoc == null ? "N/a" : x.LoaiKhoaHoc.TenLoai,
+                //});
+                //return Ok(result);
+                return Ok(model);
             }
             catch (Exception)
             {
