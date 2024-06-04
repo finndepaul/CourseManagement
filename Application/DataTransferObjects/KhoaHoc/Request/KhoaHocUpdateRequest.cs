@@ -14,7 +14,6 @@ namespace CourseManagement.Application.DataTransferObjects.KhoaHoc.Request
         public string? GioiThieu { get; set; }
         public string? NoiDung { get; set; }
         public double? HocPhi { get; set; }
-        public int? SoHocVien { get; set; }
         public int? SoLuongMon { get; set; }
         public string? HinhAnh { get; set; }
         public int? LoaiKhoaHocID { get; set; }
