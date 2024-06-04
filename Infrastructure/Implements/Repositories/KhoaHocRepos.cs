@@ -23,13 +23,17 @@ namespace CourseManagement.Infrastructure.Implements.Repositories
             var model = await _db.KhoaHocs
                 //.Include(x => x.LoaiKhoaHoc)
                 .AsNoTracking()
-                .AsQueryable()
                 .ToListAsync();
             
             if (!string.IsNullOrWhiteSpace(name))
             {
                 model = model.Where(x => x.TenKhoaHoc.ToLower().Contains(name.ToLower())).ToList();
                 
+            }
+            // Cập nhật số lượng học viên cho từng khóa học
+            foreach (var khoaHoc in model)
+            {
+                await UpdateSoLuongHocVien(khoaHoc.KhoaHocID);
             }
             var result = PageResult<KhoaHoc>.ToPageResult(request,model);
             request.TotalCount = model.Count();
@@ -94,5 +98,24 @@ namespace CourseManagement.Infrastructure.Implements.Repositories
                 return false;
             }
         }
+        public async Task UpdateSoLuongHocVien(int khoaHocId)
+        {
+            var dangKyHocs = await _db.DangKyHocs
+                .Where(x => x.KhoaHocID == khoaHocId)
+                .ToListAsync();
+
+            var soHocVienDangHoc = dangKyHocs.Count(x => x.TinhTrangHocID == 2);
+            var soHocVienHoanThanh = dangKyHocs.Count(x => x.TinhTrangHocID == 3);
+            var soHocVienChuaHoanThanh = dangKyHocs.Count(x => x.TinhTrangHocID == 4);
+            var total = soHocVienDangHoc + soHocVienHoanThanh + soHocVienChuaHoanThanh;
+            var khoaHoc = await _db.KhoaHocs.FindAsync(khoaHocId);
+            if (khoaHoc != null)
+            {
+                khoaHoc.SoHocVien = total == 0 ? 0 : total;
+                _db.KhoaHocs.Update(khoaHoc);
+                await _db.SaveChangesAsync();
+            }
+        }
+
     }
 }
