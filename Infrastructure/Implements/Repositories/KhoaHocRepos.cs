@@ -43,6 +43,7 @@ namespace CourseManagement.Infrastructure.Implements.Repositories
         {
             try
             {
+                khoaHoc.SoHocVien = 0;
                 await _db.KhoaHocs.AddAsync(khoaHoc);
                 await _db.SaveChangesAsync(cancellationToken);
                 return true;
@@ -85,7 +86,6 @@ namespace CourseManagement.Infrastructure.Implements.Repositories
                 model.GioiThieu = khoaHoc.GioiThieu;
                 model.NoiDung = khoaHoc.NoiDung;
                 model.HocPhi = khoaHoc.HocPhi;
-                model.SoHocVien = khoaHoc.SoHocVien;
                 model.SoLuongMon = khoaHoc.SoLuongMon;
                 model.HinhAnh = khoaHoc.HinhAnh;
                 model.LoaiKhoaHocID = khoaHoc.LoaiKhoaHocID;
