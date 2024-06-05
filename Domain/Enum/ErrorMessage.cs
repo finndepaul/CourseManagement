@@ -10,7 +10,7 @@ namespace CourseManagement.Domain.Enum
     {
         Successfull = 1,
         Failed = 2,
-        ModelIsNull = 3,
+        NotFindModel = 3,
         ValueIsUnique = 4,
     }
 }

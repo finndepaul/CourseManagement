@@ -17,6 +17,7 @@ namespace CourseManagement.Infrastructure.Extensions
             services.AddTransient<ILoaiKhoaHocRepos, LoaiKhoaHocRepos>();
             services.AddTransient<IKhoaHocRepos, KhoaHocRepos>();
             services.AddTransient<IHocVienRepos, HocVienRepos>();
+            services.AddTransient<ITinhTrangHocRepos, TinhTrangHocRepos>();
             return services;
         }
     }

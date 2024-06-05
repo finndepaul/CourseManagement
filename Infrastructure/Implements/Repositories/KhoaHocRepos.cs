@@ -44,7 +44,7 @@ namespace CourseManagement.Infrastructure.Implements.Repositories
             try
             {
                 khoaHoc.SoHocVien = 0;
-                await _db.KhoaHocs.AddAsync(khoaHoc);
+                await _db.KhoaHocs.AddAsync(khoaHoc, cancellationToken);
                 await _db.SaveChangesAsync(cancellationToken);
                 return true;
             }

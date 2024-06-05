@@ -35,11 +35,7 @@ namespace CourseManagement.API.Controllers
                 if (result == ErrorMessage.ValueIsUnique)
                 {
                     return BadRequest("Email và SDT đã có, vui lòng thêm lại");
-                }
-                else if (result == ErrorMessage.ModelIsNull)
-                {
-                    return BadRequest("Trường dữ liệu trống!!");
-                }
+                }             
                 else
                 {
                     return Ok("Thêm thành công");
@@ -60,9 +56,9 @@ namespace CourseManagement.API.Controllers
                 {
                     return BadRequest("Email và SDT đã có, vui lòng cập nhật lại");
                 }
-                else if (result == ErrorMessage.ModelIsNull)
+                else if (result == ErrorMessage.NotFindModel)
                 {
-                    return BadRequest("Trường dữ liệu trống!!");
+                    return BadRequest("Không tìm thấy đối tượng");
                 }
                 else
                 {
@@ -75,7 +71,7 @@ namespace CourseManagement.API.Controllers
             }
         }
         [HttpDelete]
-        public async Task<IActionResult> DeleteRecord(HocVienDeleteRequest request, CancellationToken cancellation)
+        public async Task<IActionResult> DeleteRecord([FromQuery]HocVienDeleteRequest request, CancellationToken cancellation)
         {
             try
             {
@@ -84,9 +80,9 @@ namespace CourseManagement.API.Controllers
                 {
                     return BadRequest("Email và SDT đã có, vui lòng thêm lại");
                 }
-                else if (result == ErrorMessage.ModelIsNull)
+                else if (result == ErrorMessage.NotFindModel)
                 {
-                    return BadRequest("Trường dữ liệu trống!!");
+                    return BadRequest("Không tìm thấy đối tượng");
                 }
                 else
                 {

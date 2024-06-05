@@ -47,9 +47,9 @@ namespace CourseManagement.API.Controllers
             try
             {
                 var result = await _repos.UpdateLoaiKhoaHoc(_mapper.Map<LoaiKhoaHoc>(request), cancellation);
-                if (result == ErrorMessage.ModelIsNull)
+                if (result == ErrorMessage.NotFindModel)
                 {
-                    return BadRequest("Trường dữ liệu bị trống");
+                    return BadRequest("Không tìm thấy đối tượng");
                 }
                 return Ok(new LoaiKhoaHocDto()
                 {
@@ -67,9 +67,9 @@ namespace CourseManagement.API.Controllers
             try
             {
                 var result = await _repos.DeleteLoaiKhoaHoc(_mapper.Map<LoaiKhoaHoc>(request), cancellation);
-                if (result == ErrorMessage.ModelIsNull)
+                if (result == ErrorMessage.NotFindModel)
                 {
-                    return BadRequest("Trường dữ liệu bị trống");
+                    return BadRequest("Không tìm thấy đối tượng");
                 }
                 return Ok("Xóa thành công!!!");
             }

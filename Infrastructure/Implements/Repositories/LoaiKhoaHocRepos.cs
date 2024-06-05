@@ -22,7 +22,7 @@ namespace CourseManagement.Infrastructure.Implements.Repositories
         {
             try
             {
-                await _db.LoaiKhoaHocs.AddAsync(loaiKhoaHoc);
+                await _db.LoaiKhoaHocs.AddAsync(loaiKhoaHoc, cancellation);
                 await _db.SaveChangesAsync(cancellation);
                 return ErrorMessage.Successfull;
             }
@@ -39,7 +39,7 @@ namespace CourseManagement.Infrastructure.Implements.Repositories
                 var model = await _db.LoaiKhoaHocs.FirstOrDefaultAsync(x => x.LoaiKhoaHocID == loaiKhoaHoc.LoaiKhoaHocID, cancellation);
                 if (model == null)
                 {
-                    return ErrorMessage.ModelIsNull;
+                    return ErrorMessage.NotFindModel;
                 }
                 _db.LoaiKhoaHocs.Remove(model);
                 await _db.SaveChangesAsync(cancellation);
@@ -58,7 +58,7 @@ namespace CourseManagement.Infrastructure.Implements.Repositories
                 var model = await _db.LoaiKhoaHocs.FirstOrDefaultAsync(x => x.LoaiKhoaHocID == loaiKhoaHoc.LoaiKhoaHocID, cancellation);
                 if (model == null)
                 {
-                    return ErrorMessage.ModelIsNull;
+                    return ErrorMessage.NotFindModel;
                 }
                 model.TenLoai = loaiKhoaHoc.TenLoai;
                 _db.LoaiKhoaHocs.Update(model);

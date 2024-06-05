@@ -68,7 +68,7 @@ namespace CourseManagement.Infrastructure.Implements.Repositories
                 var model = await _db.HocViens.FirstOrDefaultAsync(x => x.HocVienID == hocVien.HocVienID, cancellationToken);
                 if (model == null)
                 {
-                    return ErrorMessage.ModelIsNull;
+                    return ErrorMessage.NotFindModel;
                 }
                 model.HinhAnh = DinhDangHinhAnh(hocVien);
                 model.HoTen = DinhDangTen(hocVien);
@@ -96,7 +96,7 @@ namespace CourseManagement.Infrastructure.Implements.Repositories
                 var model = await _db.HocViens.FirstOrDefaultAsync(x => x.HocVienID == hocVien.HocVienID, cancellationToken);
                 if (model == null)
                 {
-                    return ErrorMessage.ModelIsNull;
+                    return ErrorMessage.NotFindModel;
                 }
                 _db.HocViens.Remove(model);
                 await _db.SaveChangesAsync(cancellationToken);
