@@ -3,6 +3,7 @@ using CourseManagement.Application.DataTransferObjects.LoaiKhoaHoc;
 using CourseManagement.Application.DataTransferObjects.LoaiKhoaHoc.Request;
 using CourseManagement.Application.Interfaces.Repositories;
 using CourseManagement.Domain.Entities;
+using CourseManagement.Domain.Enum;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -26,9 +27,9 @@ namespace CourseManagement.API.Controllers
             try
             {
                 var result = await _repos.CreateLoaiKhoaHoc(_mapper.Map<LoaiKhoaHoc>(request), cancellation);
-                if (result == null)
+                if (result == ErrorMessage.Failed)
                 {
-                    return BadRequest();
+                    return BadRequest("Thêm thất bại");
                 }
                 return Ok(new LoaiKhoaHocDto()
                 {
@@ -46,9 +47,9 @@ namespace CourseManagement.API.Controllers
             try
             {
                 var result = await _repos.UpdateLoaiKhoaHoc(_mapper.Map<LoaiKhoaHoc>(request), cancellation);
-                if (result == null)
+                if (result == ErrorMessage.ModelIsNull)
                 {
-                    return BadRequest();
+                    return BadRequest("Trường dữ liệu bị trống");
                 }
                 return Ok(new LoaiKhoaHocDto()
                 {
@@ -61,14 +62,14 @@ namespace CourseManagement.API.Controllers
             }
         }
         [HttpDelete]
-        public async Task<IActionResult> DeleteRecord(LoaiKhoaHocDeleteRequest request, CancellationToken cancellation)
+        public async Task<IActionResult> DeleteRecord([FromQuery] LoaiKhoaHocDeleteRequest request, CancellationToken cancellation)
         {
             try
             {
                 var result = await _repos.DeleteLoaiKhoaHoc(_mapper.Map<LoaiKhoaHoc>(request), cancellation);
-                if (result == null)
+                if (result == ErrorMessage.ModelIsNull)
                 {
-                    return BadRequest();
+                    return BadRequest("Trường dữ liệu bị trống");
                 }
                 return Ok("Xóa thành công!!!");
             }

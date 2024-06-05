@@ -8,8 +8,9 @@ namespace CourseManagement.Domain.Enum
 {
     public enum ErrorMessage
     {
-        Successfull,
-        Failed,
-        ModelIsNull,
+        Successfull = 1,
+        Failed = 2,
+        ModelIsNull = 3,
+        ValueIsUnique = 4,
     }
 }

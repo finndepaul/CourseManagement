@@ -2,6 +2,7 @@
 using CourseManagement.Domain.Entities;
 using CourseManagement.Domain.Enum;
 using CourseManagement.Infrastructure.Database.AppDbContext;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,7 +36,7 @@ namespace CourseManagement.Infrastructure.Implements.Repositories
         {
             try
             {
-                var model = _db.LoaiKhoaHocs.FirstOrDefault(x => x.LoaiKhoaHocID == loaiKhoaHoc.LoaiKhoaHocID);
+                var model = await _db.LoaiKhoaHocs.FirstOrDefaultAsync(x => x.LoaiKhoaHocID == loaiKhoaHoc.LoaiKhoaHocID, cancellation);
                 if (model == null)
                 {
                     return ErrorMessage.ModelIsNull;
@@ -54,7 +55,7 @@ namespace CourseManagement.Infrastructure.Implements.Repositories
         {
             try
             {
-                var model = _db.LoaiKhoaHocs.FirstOrDefault(x => x.LoaiKhoaHocID == loaiKhoaHoc.LoaiKhoaHocID);
+                var model = await _db.LoaiKhoaHocs.FirstOrDefaultAsync(x => x.LoaiKhoaHocID == loaiKhoaHoc.LoaiKhoaHocID, cancellation);
                 if (model == null)
                 {
                     return ErrorMessage.ModelIsNull;

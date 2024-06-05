@@ -22,7 +22,7 @@ namespace CourseManagement.API.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet("get-all")]
+        [HttpGet]
         public async Task<IActionResult> GetAll([FromQuery] string? name, [FromQuery] PaginationRequest request)
         {
             try
@@ -75,7 +75,7 @@ namespace CourseManagement.API.Controllers
             }
         }
         [HttpDelete]
-        public async Task<IActionResult> DeleteRecord(KhoaHocDeleteRequest request, CancellationToken cancellation)
+        public async Task<IActionResult> DeleteRecord([FromQuery] KhoaHocDeleteRequest request, CancellationToken cancellation)
         {
             try
             {

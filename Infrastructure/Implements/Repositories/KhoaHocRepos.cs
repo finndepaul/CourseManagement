@@ -58,7 +58,7 @@ namespace CourseManagement.Infrastructure.Implements.Repositories
         {
             try
             {
-                var model = await _db.KhoaHocs.FirstOrDefaultAsync(x => x.KhoaHocID == khoaHoc.KhoaHocID);
+                var model = await _db.KhoaHocs.FirstOrDefaultAsync(x => x.KhoaHocID == khoaHoc.KhoaHocID, cancellationToken);
                 if (model == null)
                 {
                     return false;
@@ -76,7 +76,7 @@ namespace CourseManagement.Infrastructure.Implements.Repositories
         {
             try
             {
-                var model = await _db.KhoaHocs.FirstOrDefaultAsync(x => x.KhoaHocID == khoaHoc.KhoaHocID);
+                var model = await _db.KhoaHocs.FirstOrDefaultAsync(x => x.KhoaHocID == khoaHoc.KhoaHocID, cancellationToken);
                 if (model == null)
                 {
                     return false;
